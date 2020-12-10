@@ -123,18 +123,33 @@ function starterQuestion() {
         case "Add Department":
           addOptions("department", answer);
           break;
+        case "Add Role":
+          addOptions("role", answer);
+          break;
+        case "Add Employee":
+          addOptions("employee", answer);
+          break;
       }
     })
 }
 
 // Function to VIEW a department, role, or employee
 function viewOptions() {
-  
+  // Use if else to switch parameters within the table
+
+  // Variable instered determined by the previous questions answer
+
+  // Varible to make connection to db table
 }
 
 // Function to ADD a department, role or employee
-function addOptions() {
- 
+function addOptions(addAnswer, answer) {
+  let tableAnswers = {}
+  // Use if else to switch parameters within the table
+
+  // Variable instered determined by the previous questions answer
+
+  // Varible to make connection to db table
 }
 
 // Function to UPDATE and employee
