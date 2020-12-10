@@ -31,110 +31,64 @@ console.log("connected as id " + connection.threadId);
 });
 
 // Function prompts the user for what action they should take
-function start() {
+function starterQuestion() {
   inquirer
-    .prompt({
+    .prompt([{
       name: "viewAddOrRemove",
       type: "list",
       message: "Would you like to to do?",
-      choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee", "Exit"]
-    })
+      choices: [
+        "Add Department",
+        "Add Role",
+        "Add Employee",
+        "View Departments",
+        "View Roles",
+        "View Employees",
+        "Update Employee Role",
+        "Exit"
+      ]
+    }, {
+      name: "departmentName",
+      type: "input",
+      message: "What is the department name you would like to add?",
+      when: function(answer) {
+        return !!answer.starterQuestion && (answer.starterQuestion === "Add Department")
+      }
+    }, {
+      name: "roleTitle",
+      type: "input",
+      message: "What is the role title you would like to add?",
+      when: function(answer) {
+        return !!answer.starterQuestion && (answer.starterQuestion === "Add Role")
+      }
+    }, {
+      name: "employeeName",
+      type: "input",
+      message: "What is the employee name you would like to add?",
+      when: function(answer) {
+        return !!answer.starterQuestion && (answer.starterQuestion === "Add Employee")
+      }
+    }])
     .then(function(answer) {
-      // based on their answer, either call the bid or the post functions
-      if (answer.viewAddOrRemove === "View All Employees") {
-        viewAll();
+      switch (answer.starterQuestion) {
+        case "Add Department":
+          addOptions("department", answer);
+          break;
       }
-      else if(answer.viewAddOrRemove === "View All Employees by Department") {
-        viewByDepartment();
-      } 
-      else if(answer.viewAddOrRemove === "View All Employees by Manager") {
-        viewByManager();
-      } 
-      else if(answer.viewAddOrRemove === "Add Employee") {
-        addEmployee();
-      } 
-      else if(answer.viewAddOrRemove === "Remove Employee") {
-        removeEmployee();
-      } 
-      // This probably can be written a different way, but I'm not sure.
-      else if(answer.viewAddOrRemove === "Exit") {
-        connection.end();
-      } 
-      else{
-        connection.end();
-      }
-    });
+    })
 }
 
-// Function to view ALL employees
-function viewAll() {
+// Function to VIEW a department, role, or employee
+function viewOptions() {
   
 }
 
-// Function to view by DEPARTMENT
-function viewByDepartment() {
+// Function to ADD a department, role or employee
+function addOptions() {
  
 }
 
-// Function to view by MANAGER
-function viewByManager() {
-  
-}
-
-// Function to ADD employee
-function addEmployee() {
-  inquirer
-    .prompt([
-      {
-        name: "employeeFirstName",
-        type: "input",
-        message: "Enter employee first name:"
-      },
-      {
-        name: "employeeLastName",
-        type: "input",
-        message: "Enter employee last name:"
-      },
-      {
-        name: "employeeRoleId",
-        type: "input",
-        message: "Enter employee ID:",
-        placeholder: "must be a number"
-      },
-      {
-        name: "employeeManagerId",
-        type: "input",
-        message: "Enter manager ID:",
-        placeholder: "must be a number"
-      }
-    ])
-    .then(function(answer){
-      connection.query(
-        "INSERT INTO employee",
-        {
-          first_name: answer.employeeFirstName,
-          last_name: answer.employeeLastName,
-          role_id: answer.employeeRoleId,
-          manager_id: answer.employeeRoleId,
-        },
-        function(err) {
-          if (err) throw err;
-          console.log("Your employee was successfully added!")
-          // re-prompt user if they want to view, add or remove
-          start();
-        }
-      );
-    });
-}
-
-// Function to REMOVE employee
-function removeEmployee() {
-  
-}
-
-
-
-
+// Function to UPDATE and employee
 
 
 
