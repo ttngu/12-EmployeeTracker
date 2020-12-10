@@ -24,27 +24,43 @@ connection.connect(function(err) {
   if (err) {
     console.error("error connecting: " + err.stack);
     return;
-  }
-  console.log("connected as id " + connection.threadId);
+}
+console.log("connected as id " + connection.threadId);
+    // run the start function after the connection is made to prompt the user
+    start();
 });
 
 // Function prompts the user for what action they should take
 function start() {
     inquirer
       .prompt({
-        name: "postOrBid",
+        name: "viewAddOrRemove",
         type: "list",
-        message: "Would you like to [POST] an auction or [BID] on an auction?",
-        choices: ["POST", "BID", "EXIT"]
+        message: "Would you like to to do?",
+        choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee", "Exit"]
       })
       .then(function(answer) {
         // based on their answer, either call the bid or the post functions
-        if (answer.postOrBid === "POST") {
-          postAuction();
+        if (answer.viewAddOrRemove === "View All Employees") {
+          viewAll();
         }
-        else if(answer.postOrBid === "BID") {
-          bidAuction();
-        } else{
+        else if(answer.viewAddOrRemove === "View All Employees by Department") {
+          viewByDepartment();
+        } 
+        else if(answer.viewAddOrRemove === "View All Employees by Manager") {
+          viewByManager();
+        } 
+        else if(answer.viewAddOrRemove === "Add Employee") {
+          addEmployee();
+        } 
+        else if(answer.viewAddOrRemove === "Remove Employee") {
+          removeEmployee();
+        } 
+        // This probably can be written a different way, but I'm not sure.
+        else if(answer.viewAddOrRemove === "Exit") {
+          connection.end();
+        } 
+        else{
           connection.end();
         }
       });
