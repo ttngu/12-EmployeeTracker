@@ -27,7 +27,7 @@ connection.connect(function(err) {
 }
 console.log("connected as id " + connection.threadId);
   // run the start function after the connection is made to prompt the user
-  start();
+  starterQuestion();
 });
 
 // Function prompts the user for what action they should take
