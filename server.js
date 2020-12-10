@@ -50,14 +50,28 @@ function starterQuestion() {
     }, {
       name: "departmentName",
       type: "input",
-      message: "What is the department name you would like to add?",
+      message: "What is the department name?",
       when: function(answer) {
         return !!answer.starterQuestion && (answer.starterQuestion === "Add Department")
       }
     }, {
       name: "roleTitle",
       type: "input",
-      message: "What is the role title you would like to add?",
+      message: "What is the role title?",
+      when: function(answer) {
+        return !!answer.starterQuestion && (answer.starterQuestion === "Add Role")
+      }
+    }, {
+      name: "roleSalary",
+      type: "input",
+      message: "What is the role salary?",
+      when: function(answer) {
+        return !!answer.starterQuestion && (answer.starterQuestion === "Add Role")
+      }
+    }, {
+      name: "roleDepartmentId",
+      type: "input",
+      message: "What is the role department ID?",
       when: function(answer) {
         return !!answer.starterQuestion && (answer.starterQuestion === "Add Role")
       }
