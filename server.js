@@ -76,11 +76,46 @@ function starterQuestion() {
         return !!answer.starterQuestion && (answer.starterQuestion === "Add Role")
       }
     }, {
-      name: "employeeName",
+      name: "employeeFirstName",
       type: "input",
-      message: "What is the employee name you would like to add?",
+      message: "What is the employee's first name'?",
       when: function(answer) {
         return !!answer.starterQuestion && (answer.starterQuestion === "Add Employee")
+      }
+    }, {
+      name: "employeeLastName",
+      type: "input",
+      message: "What is the employee's last name'?",
+      when: function(answer) {
+        return !!answer.starterQuestion && (answer.starterQuestion === "Add Employee")
+      }
+    }, {
+      name: "employeeRoleId",
+      type: "input",
+      message: "What is the employee's role ID?",
+      when: function(answer) {
+        return !!answer.starterQuestion && (answer.starterQuestion === "Add Employee")
+      }
+    }, {
+      name: "employeeManagerId",
+      type: "input",
+      message: "What is the manager's ID?",
+      when: function(answer) {
+        return !!answer.starterQuestion && (answer.starterQuestion === "Add Employee")
+      }
+    }, {
+      name: "updateEmployeeId",
+      type: "input",
+      message: "What is the updated employee's ID?",
+      when: function(answer) {
+        return !!answer.starterQuestion && (answer.starterQuestion === "Update Employee Role")
+      }
+    }, {
+      name: "updateEmployeeRole",
+      type: "input",
+      message: "What is empolyee's updated role Id?",
+      when: function(answer) {
+        return !!answer.starterQuestion && (answer.starterQuestion === "Update Employee Role")
       }
     }])
     .then(function(answer) {
